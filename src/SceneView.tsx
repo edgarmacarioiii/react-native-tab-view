@@ -14,6 +14,7 @@ type Props<T extends Route> = SceneRendererProps &
     lazyPreloadDistance: number;
     index: number;
     children: (props: { loading: boolean }) => React.ReactNode;
+    containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
   };
 
@@ -102,7 +103,7 @@ export default class SceneView<T extends Route> extends React.Component<
   };
 
   render() {
-    const { navigationState, index, layout, style } = this.props;
+    const { navigationState, index, layout, containerStyle, style: defaultStyle } = this.props;
     const { loading } = this.state;
 
     const focused = navigationState.index === index;
@@ -120,7 +121,8 @@ export default class SceneView<T extends Route> extends React.Component<
             : focused
             ? StyleSheet.absoluteFill
             : null,
-          style,
+            !focused && defaultStyle,
+            containerStyle,
         ]}
       >
         {
