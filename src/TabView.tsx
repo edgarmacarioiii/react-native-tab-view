@@ -115,7 +115,7 @@ export default function TabView<T extends Route>({
                       containerStyle={sceneContainerStyle}
                     >
                       {({ loading }) =>
-                        loading
+                        loading || i !== navigationState.index
                           ? renderLazyPlaceholder({ route })
                           : renderScene({
                               ...sceneRendererProps,
